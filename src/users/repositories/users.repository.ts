@@ -9,20 +9,20 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 // EXECUTA O CRUD DE CADA ENTITY JUNTO AO BANCO
 @Injectable()
 export class UsersRepository {
-    constructor(private readonly prima: PrismaService) {}
+    constructor(private readonly prisma: PrismaService) {}
 
     // Recebe o dado tratado pela regra no service e grava através do Prisma no Database
     async create(createUserDto: CreateUserDto): Promise<UserEntity> {
-        return this.prima.user.create({
+        return this.prisma.user.create({
             data: createUserDto,
         });
     }
     async findAll(): Promise<UserEntity[]> {
-        return this.prima.user.findMany({});
+        return this.prisma.user.findMany({});
     }
 
     async findOne(id: number): Promise<UserEntity> {
-        return this.prima.user.findUnique({
+        return this.prisma.user.findUnique({
             where: {
                 id,
             },
@@ -33,7 +33,7 @@ export class UsersRepository {
         id: number,
         updateUserDto: UpdateUserDto,
     ): Promise<UserEntity> {
-        return this.prima.user.update({
+        return this.prisma.user.update({
             where: {
                 id,
             },
@@ -42,7 +42,7 @@ export class UsersRepository {
     }
 
     async remove(id: number): Promise<UserEntity> {
-        return this.prima.user.delete({
+        return this.prisma.user.delete({
             where: {
                 id,
             },

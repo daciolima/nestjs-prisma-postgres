@@ -22,5 +22,6 @@ nest g service prisma
 
 # Inicia o serviço web prima. Se usar docker deve ser dentro do container
 npx prisma studio   # Necessário liberar porta 5555 se estiver no docker
+
 ```
 
