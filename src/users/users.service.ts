@@ -2,32 +2,32 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './repositories/users.repository';
-
+import { UnauthorizedError } from 'src/common/errors/UnauthorizedError';
 
 // EXECUTA A REGRA DE NEGÓCIO
 @Injectable()
 export class UsersService {
-
     constructor(private readonly repository: UsersRepository) {}
 
-  create(createUserDto: CreateUserDto) {
-    // Após tratado os dados pela regra, o mesmo é enviado para o repository
-    return this.repository.create(createUserDto);
-  }
+    create(createUserDto: CreateUserDto) {
+        // Após tratado os dados pela regra, o mesmo é enviado para o repository
+        return this.repository.create(createUserDto);
+    }
 
-  findAll() {
-    return this.repository.findAll();
-  }
+    findAll() {
+        throw new UnauthorizedError('Não autorizado!');
+        return this.repository.findAll();
+    }
 
-  findOne(id: number) {
-    return this.repository.findOne(id);
-  }
+    findOne(id: number) {
+        return this.repository.findOne(id);
+    }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return this.repository.update(id, updateUserDto);
-  }
+    update(id: number, updateUserDto: UpdateUserDto) {
+        return this.repository.update(id, updateUserDto);
+    }
 
-  remove(id: number) {
-    return this.repository.remove(id)
-  }
+    remove(id: number) {
+        return this.repository.remove(id);
+    }
 }
