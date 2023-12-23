@@ -6,9 +6,21 @@ import { UnauthorizedInterceptor } from './common/interceptors/unauthorized.inte
 import { NotFoundInterceptor } from './common/interceptors/notFound.interceptor copy';
 import { ConflictInterceptor } from './common/interceptors/conflict.interceptor';
 import { DatabaseInterceptor } from './common/interceptors/database.interceptor';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+
+    // Documentação Swagger
+    const config = new DocumentBuilder()
+        .setTitle('Documentação API')
+        .setDescription('Documentação API Autor/Post')
+        .setVersion('1.0')
+        .addTag('posts')
+        .build();
+
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api/docs', app, document);
 
     // conf prisma
     app.enableShutdownHooks();
