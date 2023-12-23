@@ -3,9 +3,9 @@ import {
     Get,
     Post,
     Body,
-    Patch,
     Param,
     Delete,
+    Put,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -30,7 +30,7 @@ export class PostController {
         return this.postService.findOne(+id);
     }
 
-    @Patch(':id')
+    @Put(':id')
     update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
         return this.postService.update(+id, updatePostDto);
     }
